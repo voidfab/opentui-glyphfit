@@ -1,6 +1,6 @@
 # opentui-glyphfit
 
-[![CI](https://github.com/aestheta/opentui-glyphfit/actions/workflows/ci.yml/badge.svg)](https://github.com/aestheta/opentui-glyphfit/actions/workflows/ci.yml)
+[![CI](https://github.com/voidfab/opentui-glyphfit/actions/workflows/ci.yml/badge.svg)](https://github.com/voidfab/opentui-glyphfit/actions/workflows/ci.yml)
 [![npm version](https://img.shields.io/npm/v/opentui-glyphfit.svg)](https://www.npmjs.com/package/opentui-glyphfit)
 
 Direction-aware, charset-flexible intensity-to-character rendering for [OpenTUI].
@@ -12,7 +12,7 @@ neighbour charset match** pipeline. Operates entirely over the public
 
 [OpenTUI]: https://github.com/anomalyco/opentui
 
-![Torus rendered with the ASCII charset; built-in renderer on the left, glyphfit on the right](https://raw.githubusercontent.com/aestheta/opentui-glyphfit/main/docs/media/torus-ascii.gif)
+![Torus rendered with the ASCII charset; built-in renderer on the left, glyphfit on the right](https://raw.githubusercontent.com/voidfab/opentui-glyphfit/master/docs/media/torus-ascii.gif)
 
 > *Left: OpenTUI's `drawGrayscaleBufferSupersampled`. Right: `opentui-glyphfit`
 > with the ASCII charset — same intensity field, different rendering pipeline.*
@@ -46,7 +46,7 @@ within the cell the ink falls*:
 Result: directional character selection at face/edge boundaries — visibly
 sharper geometry than pure density mapping.
 
-![Animated checkers pattern rendered through the BRAILLE charset](https://raw.githubusercontent.com/aestheta/opentui-glyphfit/main/docs/media/checkers-braille.gif)
+![Animated checkers pattern rendered through the BRAILLE charset](https://raw.githubusercontent.com/voidfab/opentui-glyphfit/master/docs/media/checkers-braille.gif)
 
 > *Procedural checkers field at 256-state braille. Cells straddling pattern
 > edges pick directional braille codepoints; cells in the interior pick the
@@ -99,6 +99,29 @@ drawGlyphFitColor(buffer, {
 
 ## Render any image as terminal art
 
+<table>
+  <tr>
+    <td align="center"><strong>Source</strong> — a 4K synthwave city render</td>
+    <td align="center"><strong>Output</strong> — ASCII charset · SYNTHWAVE palette</td>
+  </tr>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/voidfab/opentui-glyphfit/master/docs/media/synthwave-city_original.jpg" alt="Original synthwave city wallpaper, 3840x2160"></td>
+    <td><img src="https://raw.githubusercontent.com/voidfab/opentui-glyphfit/master/docs/media/synthwave-ascii_screenshot.png" alt="Same wallpaper rendered through opentui-glyphfit with the ASCII charset and SYNTHWAVE palette, saved as a PNG via the [s] hotkey"></td>
+  </tr>
+</table>
+
+> *Captured from the live demo with `[s]`. The PNG is the **same physical
+> resolution** as the source image, suitable for use as a desktop wallpaper.*
+
+```bash
+# Reproduce the right-hand image above
+GLYPHFIT_PNG_CELLS_WIDE=320 \
+  bun demos/image.ts docs/media/synthwave-city_original.jpg ascii synthwave
+# press [s] — a wallpaper-resolution PNG drops into screenshots/
+```
+
+Programmatic use:
+
 ```ts
 import { drawGlyphFit, intensityFromPixels, resampleIntensity, BLOCKS_SHADE } from "opentui-glyphfit"
 
@@ -117,8 +140,9 @@ drawGlyphFit(buffer, {
 })
 ```
 
-`demos/image.ts` is a runnable example that shells out to ImageMagick to do
-the decoding (so it works without bundling a heavy peer dep).
+`demos/image.ts` is a runnable end-to-end example. It uses `pngjs` and
+`jpeg-js` (devDependencies, pure JS, no native bindings) so it works on
+any machine without external tools.
 
 ---
 
@@ -221,7 +245,7 @@ their intensity is identical.
 | `BOX` | 22 | Wireframe / grid content |
 | `ASCII` | 95 | Classic ASCII art |
 
-![Sphere rendered with the BOX charset producing wireframe-like vertical bars](https://raw.githubusercontent.com/aestheta/opentui-glyphfit/main/docs/media/sphere-box.gif)
+![Sphere rendered with the BOX charset producing wireframe-like vertical bars](https://raw.githubusercontent.com/voidfab/opentui-glyphfit/master/docs/media/sphere-box.gif)
 
 > *The same sphere through the BOX charset (22 chars). Box-drawing primitives
 > have asymmetric ShapeVectors that line up with the sphere's tonal contours,
