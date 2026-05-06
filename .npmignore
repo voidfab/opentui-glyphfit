@@ -1,0 +1,23 @@
+# `files` whitelist in package.json controls what gets published; this is just
+# belt-and-suspenders for things that should never end up in a published tarball.
+
+.github
+.git
+.DS_Store
+node_modules
+tests
+demos
+bench
+scripts
+docs
+DESIGN.md
+tsconfig.json
+bun.lock
+*.log
+*.tsbuildinfo
+*.gif
+*.mp4
+*.png
+.editorconfig
+screenshots
+

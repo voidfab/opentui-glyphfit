@@ -1,0 +1,69 @@
+{
+  "name": "opentui-glyphfit",
+  "version": "0.5.0",
+  "description": "Direction-aware, charset-flexible intensity-to-character rendering for OpenTUI",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./charsets": {
+      "types": "./dist/charsets/index.d.ts",
+      "import": "./dist/charsets/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "opentui",
+    "terminal",
+    "tui",
+    "ascii",
+    "braille",
+    "rendering",
+    "glyph",
+    "intensity",
+    "supersampling"
+  ],
+  "scripts": {
+    "build": "bun scripts/build.ts",
+    "prepublishOnly": "bun run build && bun test",
+    "test": "bun test",
+    "test:watch": "bun test --watch",
+    "test:snapshots": "bun test tests/snapshots.test.ts",
+    "test:perf": "bun test tests/perf.test.ts",
+    "typecheck": "tsc --noEmit",
+    "bench": "bun bench/index.ts",
+    "demo": "bun demos/comparison.ts",
+    "demo:image": "bun demos/image.ts",
+    "clean": "rm -rf dist"
+  },
+  "peerDependencies": {
+    "@opentui/core": ">=0.2.0"
+  },
+  "devDependencies": {
+    "@opentui/core": "^0.2.2",
+    "@types/bun": "latest",
+    "jpeg-js": "^0.4.4",
+    "pngjs": "^7.0.0",
+    "typescript": "^5"
+  },
+  "engines": {
+    "bun": ">=1.3.0",
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

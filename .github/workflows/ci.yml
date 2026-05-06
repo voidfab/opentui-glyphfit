@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        bun: ["1.3.6", "latest"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ matrix.bun }}
+
+      - name: Install
+        run: bun install --frozen-lockfile
+
+      - name: Typecheck
+        run: bun run typecheck
+
+      - name: Test
+        run: bun test
+
+      - name: Build
+        run: bun run build
+
+      - name: Smoke-test built artefact
+        run: |
+          cat > /tmp/smoke.mjs <<'EOF'
+          import { drawGlyphFit, BLOCKS_SHADE, matchField, shapeOf, GlyphFitError, InvalidFieldError } from "./dist/index.js"
+          if (BLOCKS_SHADE.length !== 25) throw new Error("BLOCKS_SHADE length wrong: " + BLOCKS_SHADE.length)
+          if (shapeOf(0x2588).join() !== "1,1,1,1,1,1") throw new Error("shapeOf wrong")
+          try { drawGlyphFit({width:1,height:1,drawChar(){}}, { intensities: new Float32Array(0), srcWidth: 0, srcHeight: 1, x: 0, y: 0, fg: {}, bg: {} }); throw new Error("no throw") }
+          catch (e) { if (!(e instanceof InvalidFieldError)) throw e }
+          console.log("smoke OK")
+          EOF
+          bun /tmp/smoke.mjs
+
+  bench-info:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with: { bun-version: latest }
+      - run: bun install --frozen-lockfile
+      - run: bun run bench
