@@ -27,11 +27,15 @@ export { BRAILLE } from "./charsets/braille.ts"
 export { SHADE, BLOCKS, BLOCKS_SHADE } from "./charsets/blocks.ts"
 export { BOX } from "./charsets/box.ts"
 export { ASCII } from "./charsets/ascii.ts"
+export { CANDLE, CANDLE_BOX, SPARK, DEPTH, AXIS } from "./charsets/chart.ts"
 
 // ─── Renderers ────────────────────────────────────────────────────────────────
 export { drawGlyphFit, sampleField, matchField } from "./renderer.ts"
 export { drawGlyphFitColor } from "./color-renderer.ts"
 export type { DrawGlyphFitColorOptions } from "./color-renderer.ts"
+export { drawShapeCells } from "./shape-cells.ts"
+export type { ShapeCellOp } from "./shape-cells.ts"
+export { verticalFill, horizontalFill, verticalWick } from "./sv-builders.ts"
 
 // ─── Palettes ────────────────────────────────────────────────────────────────
 export {

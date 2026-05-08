@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.0] — 2026-05-08
+
+### Added
+- **Direct ShapeVector cell drawing** — `drawShapeCells(target, ops, charset)`
+  draws pre-computed cell ShapeVectors without sampling an intensity field.
+- **Chart-oriented charsets** — `CANDLE`, `CANDLE_BOX`, `SPARK`, `DEPTH`,
+  and `AXIS`.
+- **Sub-cell ShapeVector builders** — `verticalFill`, `horizontalFill`, and
+  `verticalWick`.
+
 ## [0.5.0] — 2026-05-06
 
 ### Added

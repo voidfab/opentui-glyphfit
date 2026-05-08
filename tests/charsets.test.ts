@@ -3,9 +3,10 @@ import { BRAILLE } from "../src/charsets/braille.ts"
 import { SHADE, BLOCKS, BLOCKS_SHADE } from "../src/charsets/blocks.ts"
 import { BOX } from "../src/charsets/box.ts"
 import { ASCII } from "../src/charsets/ascii.ts"
+import { AXIS, CANDLE, CANDLE_BOX, DEPTH, SPARK } from "../src/charsets/chart.ts"
 import { findBestChar, svDistance } from "../src/shape-vector.ts"
 import { compileCharset } from "../src/compiled-charset.ts"
-import { shapeOf, buildCharset } from "../src/index.ts"
+import { shapeOf, buildCharset, verticalFill, horizontalFill, verticalWick } from "../src/index.ts"
 import { InvalidCharsetError } from "../src/errors.ts"
 import type { ShapeVector, Charset } from "../src/types.ts"
 
@@ -22,6 +23,11 @@ const ALL_CHARSETS: Array<[string, Charset]> = [
   ["BLOCKS_SHADE", BLOCKS_SHADE],
   ["BOX",          BOX],
   ["ASCII",        ASCII],
+  ["CANDLE",       CANDLE],
+  ["CANDLE_BOX",   CANDLE_BOX],
+  ["SPARK",        SPARK],
+  ["DEPTH",        DEPTH],
+  ["AXIS",         AXIS],
 ]
 
 describe.each(ALL_CHARSETS)("%s — structural invariants", (_name, cs) => {
@@ -77,6 +83,24 @@ describe.each(ALL_CHARSETS)("%s — structural invariants", (_name, cs) => {
       const r = findBestChar([...e.sv] as ShapeVector, cs)
       expect(svDistance(r.sv, e.sv)).toBeLessThan(1e-10)
     }
+  })
+})
+
+describe("chart charsets", () => {
+  it("export chart-focused vocabularies from the public entry point", async () => {
+    const mod = await import("../src/index.ts")
+    expect(mod.CANDLE.length).toBe(CANDLE.length)
+    expect(mod.CANDLE_BOX.length).toBe(CANDLE_BOX.length)
+    expect(mod.SPARK.length).toBe(SPARK.length)
+    expect(mod.DEPTH.length).toBe(DEPTH.length)
+    expect(mod.AXIS.length).toBe(AXIS.length)
+  })
+
+  it("sub-cell builders produce common chart ShapeVectors", () => {
+    expect(verticalFill(0, 1)).toEqual([1, 1, 1, 1, 1, 1])
+    expect(verticalFill(0, 0.5)).toEqual([1, 1, 0.5, 0.5, 0, 0])
+    expect(horizontalFill(0, 0.5)).toEqual([1, 0, 1, 0, 1, 0])
+    expect(verticalWick(0, 1)).toEqual([0.5, 0.5, 0.5, 0.5, 0.5, 0.5])
   })
 })
 
