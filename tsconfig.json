@@ -10,7 +10,18 @@
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
     "skipLibCheck": true,
-    "types": ["bun-types"]
+    "types": [
+      "bun-types"
+    ]
   },
-  "include": ["src/**/*", "tests/**/*", "demos/**/*", "bench/**/*", "scripts/**/*"]
+  "include": [
+    "src/**/*",
+    "tests/**/*",
+    "demos/**/*",
+    "bench/**/*",
+    "scripts/**/*"
+  ],
+  "exclude": [
+    "opensrc"
+  ]
 }
