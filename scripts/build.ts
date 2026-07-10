@@ -79,8 +79,11 @@ walkDist(DIST)
 console.log(`  rewrote ${rewriteCount.js} .js files`)
 
 console.log("→ tsc --emitDeclarationOnly")
-const r2 = spawnSync("bunx", [
-  "tsc", "--emitDeclarationOnly",
+// Re-enter through the running Bun executable instead of assuming a separate
+// `bunx` shim is on PATH. Version managers commonly expose only `bun` to the
+// script process, which made an otherwise healthy build fail after JS emit.
+const r2 = spawnSync(process.execPath, [
+  "x", "tsc", "--emitDeclarationOnly",
   "--declaration",
   "--declarationMap",
   "--outDir", DIST,

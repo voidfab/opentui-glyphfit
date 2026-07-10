@@ -53,7 +53,7 @@
     "@opentui/core": ">=0.2.0"
   },
   "devDependencies": {
-    "@opentui/core": "^0.2.2",
+    "@opentui/core": "^0.4.3",
     "@types/bun": "latest",
     "jpeg-js": "^0.4.4",
     "pngjs": "^7.0.0",

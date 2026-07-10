@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Updated the development/test matrix to `@opentui/core` 0.4.x while retaining
+  the public `>=0.2.0` peer compatibility floor.
+
+### Fixed
+- Build declaration emission now invokes `tsc` through the running Bun
+  executable, so builds no longer depend on a separately discoverable `bunx`
+  shim in `PATH`.
+
 ## [0.6.0] — 2026-05-08
 
 ### Added
