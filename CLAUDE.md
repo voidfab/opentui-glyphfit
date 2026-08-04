@@ -104,3 +104,21 @@ bun --hot ./index.ts
 ```
 
 For more information, read the Bun API docs in `node_modules/bun-types/docs/**.mdx`.
+
+<!-- memento:agents-instructions -->
+## Memento
+
+This repo uses **Memento** (`mm`), a markdown-first, repo-local tracker and memory surface.
+
+- Run `mm prime --json` at the start of each session for the full workflow guide.
+- **Workflow items** (`milestone` / `epic` / `feature` / `task` / `bug`) live in `.memento/items` and `.memento/archive`; statuses are `draft` / `todo` / `in-progress` / `completed` / `scrapped`.
+- **Observations** (`note` / `rule` / `tattoo` / `document`) live in `.memento/notes` — durable memory, not backlog work.
+- Find work with `mm rank ready --json` / `mm rank next --json`; create with `mm item create`; keep items current with `mm item update`.
+- Prefer Memento over ad hoc todo lists for repo-local tracking. Use `--json` for machine-readable output.
+<!-- /memento:agents-instructions -->
+
+<!-- memento:project-prefix -->
+### Item IDs in this repo
+
+New Memento items and notes mint with the **`OTG-`** prefix (`identity.default_prefix` in `.memento.yml`). Ids created before the per-project prefixes — `mm-…`, and `hbd-…` in haberdashery — are left as they are: memento has no re-id verb, and the ids are referenced by `blocked_by:` relations and ledger entries. A mixed set is expected; do not try to normalise it.
+<!-- /memento:project-prefix -->
