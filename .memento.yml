@@ -1,0 +1,43 @@
+project:
+  name: opentui-glyphfit
+identity:
+  default_prefix: OTG
+remote:
+  primary: linear
+profiles:
+  local:
+    default:
+      id_prefix: OTG
+  remote:
+    default:
+      provider: linear
+# path_overrides: maps directory globs (relative to this file) to local/remote profile
+# names from the profiles block above. Empty by default — add entries here instead of
+# hand-editing once you need per-directory profile overrides.
+path_overrides:
+prime:
+  include_extremely_important_block: true
+  include_ignore_previous_instructions: false
+  include_cli_commands_block: true
+  include_relationships_block: true
+  include_issue_types_block: true
+  include_observation_types_block: true
+  include_observation_commands_block: true
+  include_document_indexing_block: true
+  include_search_block: true
+  include_statuses_block: true
+  include_priorities_block: true
+  include_config_block: false
+  include_sync_block: true
+  include_remote_block: true
+  # custom_blocks: optional user-defined sections appended after the built-in prime blocks.
+  # Each named entry renders as a "## <title>" section (single-line body). Example:
+  #   custom_blocks:
+  #     house_rules:
+  #       title: House Rules
+  #       body: Always run mm prime --json at session start.
+tui:
+  sort_mode: workflow
+  show_inactive_in_all: false
+  live_refresh_interval_ms: 5000
+  highlight_hotkeys: false

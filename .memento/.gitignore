@@ -1,0 +1,5 @@
+.workspaces/
+tmp/
+db/*.db-shm
+db/*.db-wal
+vectors/*.tmp
