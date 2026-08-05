@@ -3,3 +3,10 @@ tmp/
 db/*.db-shm
 db/*.db-wal
 vectors/*.tmp
+# The DERIVED sqlite index and vector store. The markdown in items/, archive/ and notes/ is
+# the source of truth; `mm` rebuilds these from it automatically. Tracking the db left the
+# tree permanently dirty on every sync and turned routine merges into binary blob conflicts,
+# while the markdown it is built from merges cleanly. Matches the memento/horos convention.
+db/*.db
+vectors/
+sessions/
